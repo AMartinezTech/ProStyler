@@ -20,7 +20,7 @@ public class ProductUsageReport
     {
         return invoices
             .SelectMany(i => i.GetItems())
-            .Where(item => item.Type.Value == ItemType.Product.ToString())
+            .Where(item => item.Type.Type == ItemType.Producto)
             .GroupBy(p => p.Description)
             .Select(g => new ProductUsageReport(
                 g.Key,

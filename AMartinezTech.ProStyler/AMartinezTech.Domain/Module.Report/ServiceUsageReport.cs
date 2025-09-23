@@ -20,7 +20,7 @@ public class ServiceUsageReport
     {
         return invoices
             .SelectMany(i => i.GetItems()) // Método expuesto desde InvoiceEntity
-            .Where(item => item.Type.Value == ItemType.Service.ToString())
+            .Where(item => item.Type.Type == ItemType.Servicio)
             .GroupBy(s => s.Description)
             .Select(g => new ServiceUsageReport(
                 g.Key,
