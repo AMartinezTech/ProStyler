@@ -1,4 +1,4 @@
-﻿using AMartinezTech.Domain.Utils.Exception;
+﻿using AMartinezTech.Domain.Utils.Exceptions;
 using System.ComponentModel.DataAnnotations;
 
 namespace AMartinezTech.Domain.Utils.ValueObjects;
