@@ -2,16 +2,16 @@
 
 namespace AMartinezTech.Domain.Module.Products;
 
-public class ValueProductCategoryName
+public class ValueItemCategoryName
 {
     public string Value { get; init; }
 
-    private ValueProductCategoryName(string value)
+    private ValueItemCategoryName(string value)
     {
         Value = value;
     }
 
-    public static ValueProductCategoryName Create(string value)
+    public static ValueItemCategoryName Create(string value)
     {
         if (string.IsNullOrEmpty(value))
             throw new Exception($"{ErrorMessages.Get(ErrorType.RequiredField)} - name");
@@ -19,6 +19,6 @@ public class ValueProductCategoryName
         if (value.Length < 4)
             throw new Exception($"{ErrorMessages.Get(ErrorType.MinLength)} 4 - name");
 
-        return new ValueProductCategoryName(value);
+        return new ValueItemCategoryName(value);
     }
 }
