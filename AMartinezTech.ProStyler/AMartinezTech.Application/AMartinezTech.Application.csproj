@@ -10,4 +10,8 @@
     <ProjectReference Include="..\AMartinezTech.Domain\AMartinezTech.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Module.Staff\UseCases\Write\" />
+  </ItemGroup>
+
 </Project>

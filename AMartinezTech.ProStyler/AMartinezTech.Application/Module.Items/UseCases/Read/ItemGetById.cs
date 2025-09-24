@@ -8,7 +8,7 @@ public class ItemGetById(IItemReadRepository repository )
 
     public async Task<ItemDto> ExecuteAsync(Guid id)
     {
-        var result = await _repository.GetById(id);
+        var result = await _repository.GetByIdAsync(id);
         return ItemMapper.ToDto(result);
     }
 }

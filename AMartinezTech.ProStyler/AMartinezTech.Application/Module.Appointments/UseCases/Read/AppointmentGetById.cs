@@ -7,7 +7,7 @@ public class AppointmentGetById(IAppointmentReadRepository repository)
 
     public async Task<AppointmentDto> ExecuteAsync(Guid id)
     {
-        var result = await _repository.GetById(id);
+        var result = await _repository.GetByIdAsync(id);
         return AppointmentMapper.ToDto(result);
     }
 }
