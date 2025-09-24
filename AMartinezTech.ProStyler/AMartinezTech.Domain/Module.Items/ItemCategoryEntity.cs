@@ -1,4 +1,4 @@
-﻿namespace AMartinezTech.Domain.Module.Products;
+﻿namespace AMartinezTech.Domain.Module.Items;
 
 public class ItemCategoryEntity
 {

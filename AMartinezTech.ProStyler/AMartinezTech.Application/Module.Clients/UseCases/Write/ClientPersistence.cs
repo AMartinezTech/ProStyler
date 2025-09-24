@@ -1,4 +1,5 @@
 ﻿using AMartinezTech.Application.Module.Clients.Interfaces;
+using AMartinezTech.Application.Utils;
 using AMartinezTech.Domain.Module.Clients;
 
 namespace AMartinezTech.Application.Module.Clients.UseCases.Write;
@@ -9,11 +10,11 @@ public class ClientPersistence(IClientWriteRepository repository)
 
     public async Task<Guid> ExecuteAsync(ClientDto dto)
     {
-        var id = dto.Id  == Guid.Empty ? Guid.NewGuid() : dto.Id;
+        Guid _id = GeneratesId.Make(dto.Id);
 
-        var entity = ClientEntity.Create(id, dto.Name, dto.Phone, dto.Email, dto.CreatedAt);
+        var entity = ClientEntity.Create(_id, dto.Name, dto.Phone, dto.Email, dto.CreatedAt);
 
         if (dto.Id == Guid.Empty) { await _repository.CreateAsync(entity); } else { await _repository.UpdateAsync(entity); }
-        return entity.Id;
+        return _id;
     }
 }
