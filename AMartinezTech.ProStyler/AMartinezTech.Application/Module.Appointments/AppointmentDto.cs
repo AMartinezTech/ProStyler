@@ -9,4 +9,5 @@ public class AppointmentDto
     public TimeOnly LimitTime { get; set; }
     public DateTime CreatedAt { get; set; }
     public string Status { get; set; } = "Pendiente";
+    public List<AppointmentServiceDto> Services { get; set; } = new();
 }

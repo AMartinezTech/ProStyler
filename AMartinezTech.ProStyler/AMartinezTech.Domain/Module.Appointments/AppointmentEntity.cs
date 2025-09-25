@@ -13,6 +13,9 @@ public class AppointmentEntity
     public DateTime CreatedAt { get; private set; }
     public ValueEnum<AppointmentStatus> Status { get; private set; }
 
+    private readonly List<AppointmentServiceEntity> _services = [];
+    public IReadOnlyCollection<AppointmentServiceEntity> Services => _services.AsReadOnly();
+
     private AppointmentEntity(Guid id, Guid staffId, Guid clientId, TimeOnly asignedTime, TimeOnly limitTime, DateTime createdAt, ValueEnum<AppointmentStatus> status)
     {
         Id = id;
@@ -27,5 +30,9 @@ public class AppointmentEntity
     public static AppointmentEntity Create(Guid id, Guid staffId, Guid clientId, TimeOnly asignedTime, TimeOnly limitTime, DateTime createdAt, string status)
     {
         return new AppointmentEntity(id, staffId, clientId, asignedTime, limitTime, createdAt, ValueEnum<AppointmentStatus>.Create(status));
+    }
+    public void AddService(AppointmentServiceEntity service)
+    {
+        _services.Add(service);
     }
 }
