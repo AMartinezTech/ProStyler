@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMartinezTech.Domain", "AMa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMartinezTech.Application", "AMartinezTech.Application\AMartinezTech.Application.csproj", "{55590CD8-CE8E-41DE-B63F-C7E4AEF6AD38}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMartinezTech.Infrastucture", "AMartinezTech.Infrastucture\AMartinezTech.Infrastucture.csproj", "{91465E4C-F4B3-4192-AA75-1A6E90F1EE3E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{55590CD8-CE8E-41DE-B63F-C7E4AEF6AD38}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55590CD8-CE8E-41DE-B63F-C7E4AEF6AD38}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55590CD8-CE8E-41DE-B63F-C7E4AEF6AD38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91465E4C-F4B3-4192-AA75-1A6E90F1EE3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91465E4C-F4B3-4192-AA75-1A6E90F1EE3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91465E4C-F4B3-4192-AA75-1A6E90F1EE3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91465E4C-F4B3-4192-AA75-1A6E90F1EE3E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
