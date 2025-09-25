@@ -1,7 +1,7 @@
 ﻿using AMartinezTech.Domain.Module.Billing;
 using AMartinezTech.Domain.Utils.Enums;
 
-namespace AMartinezTech.Domain.Module.Report;
+namespace AMartinezTech.Domain.Module.Reports;
 
 public class ProductUsageReport
 {

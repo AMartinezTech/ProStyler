@@ -1,6 +1,6 @@
 ﻿using AMartinezTech.Domain.Module.Billing;
 
-namespace AMartinezTech.Domain.Module.Report;
+namespace AMartinezTech.Domain.Module.Reports;
 
 public class AverageTicketReport
 {

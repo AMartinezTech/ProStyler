@@ -1,9 +1,8 @@
-﻿using AMartinezTech.Domain.Module.Billing;
-using System.Security.Cryptography;
+﻿using AMartinezTech.Domain.Module.Billing; 
 
-namespace AMartinezTech.Domain.Module.Report;
+namespace AMartinezTech.Domain.Module.Reports;
 
-public class ReportService(IEnumerable<InvoiceEntity> invoices)
+public class SalesReportService(IEnumerable<InvoiceEntity> invoices)
 {
     private readonly IReadOnlyCollection<InvoiceEntity> _invoices = invoices.ToList().AsReadOnly();
 
@@ -28,8 +27,8 @@ public class ReportService(IEnumerable<InvoiceEntity> invoices)
         => ClientLoyaltyReport.Generate(_invoices);
 
     // Reporte 6: Facturas por Estado
-    public InvoiceStatusReport GetInvoiceStatusReport()
-        => (InvoiceStatusReport)InvoiceStatusReport.Generate(_invoices);
+    public SalesStatusReport GetInvoiceStatusReport()
+        => (SalesStatusReport)SalesStatusReport.Generate(_invoices);
 
     // Reporte 7: Promedio de Ticket
     public AverageTicketReport GetAverageTicket()

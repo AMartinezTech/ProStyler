@@ -1,9 +1,9 @@
 ﻿using AMartinezTech.Domain.Module.Billing;
 
-namespace AMartinezTech.Domain.Module.Report;
+namespace AMartinezTech.Domain.Module.Reports;
 
 public class SalesReport
-{
+{ 
     public DateTime Date { get; private set; }
     public decimal TotalSales { get; private set; }
     public int TotalInvoices { get; private set; }
