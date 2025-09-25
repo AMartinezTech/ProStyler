@@ -6,47 +6,44 @@ namespace AMartinezTech.Domain.Module.Billing;
 
 public class InvoiceEntity
 {
-    public Guid Id { get; private set; } = Guid.NewGuid();
-
+    public Guid Id { get; private set; }
     public ValueGuid ClientId { get; private set; }
     public string ClientName { get; private set; }
-
     public ValueGuid StaffId { get; private set; }
     public string StaffName { get; private set; }
-
     public DateTime CreatedAt { get; private set; } = DateTime.UtcNow;
     public ValueEnum<InvoiceStatus> Status { get; private set; } = ValueEnum<InvoiceStatus>.Create("Pendiente");
-
     private readonly List<InvoiceItem> _items = [];
     public IReadOnlyCollection<InvoiceItem> Items => _items.AsReadOnly();
 
     public decimal TotalAmount => _items.Sum(i => i.Total);
 
- 
-    private InvoiceEntity(ValueGuid clientId, string clientName, ValueGuid staffId, string staffName)
+
+    private InvoiceEntity(Guid id, ValueGuid clientId, string clientName, ValueGuid staffId, string staffName)
     {
+        Id = id;
         ClientId = clientId;
         ClientName = clientName;
         StaffId = staffId;
         StaffName = staffName;
     }
-    public static InvoiceEntity Create(Guid clientId, string clientName, Guid staffId, string staffName)
+    public static InvoiceEntity Create(Guid id, Guid clientId, string clientName, Guid staffId, string staffName)
     {
-        return new InvoiceEntity(ValueGuid.Create(clientId,"customer"), clientName, ValueGuid.Create(staffId,"staff"), staffName);
+        return new InvoiceEntity(id, ValueGuid.Create(clientId, "customer"), clientName, ValueGuid.Create(staffId, "staff"), staffName);
     }
     // ✅ Método de dominio para agregar un ítem
-    public void AddItem(ValueEnum<ItemType> type, string description, decimal quantity, decimal unitPrice)
+    public void AddItem(string type, string description, decimal quantity, decimal unitPrice)
     {
         if (quantity <= 0) throw new Exception($"{ErrorMessages.Get(ErrorType.NoNegativeNum)} - quantity");
         if (unitPrice < 0) throw new Exception($"{ErrorMessages.Get(ErrorType.NoNegativeNum)} - unitprice ");
 
 
-        var item = new InvoiceItem(this.Id, type, description, quantity, unitPrice);
+        var item = new InvoiceItem(this.Id, ValueEnum<ItemType>.Create(type), description, quantity, unitPrice);
         _items.Add(item);
     }
     // ✅ Método de acceso controlado
     public IReadOnlyCollection<InvoiceItem> GetItems()
-        => _items.AsReadOnly(); 
+        => _items.AsReadOnly();
 
 
     // ✅ Método para remover ítem
