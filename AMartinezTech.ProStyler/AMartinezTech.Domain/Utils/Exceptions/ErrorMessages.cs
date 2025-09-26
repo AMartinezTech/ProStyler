@@ -15,6 +15,11 @@ public class ErrorMessages
             ErrorType.PostiveNum => "El valor númerico debe ser mayor a cero.",
             ErrorType.RangeValid => "El rango permitdo es",
             ErrorType.NullDetails => "El detalle es obligatorio",
+            ErrorType.RecordDoesDotExist => "El registro no existe.!",
+            ErrorType.RecordCreateError => "Error creando el registro.!",
+            ErrorType.RecordUpdateError => "Error actualizando el registro.!",
+            ErrorType.RecordDeleteError => "Error borrando el registro.!",
+            ErrorType.DataBaseUnknownError => "Error desconocido de base de datos.!",
             _ => "Error no definido",
         };
     }  

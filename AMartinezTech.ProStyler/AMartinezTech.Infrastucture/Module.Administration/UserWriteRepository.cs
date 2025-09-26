@@ -1,5 +1,6 @@
 ﻿using AMartinezTech.Application.Module.Administration.Interfaces;
 using AMartinezTech.Domain.Module.Administration;
+using AMartinezTech.Domain.Utils.Exceptions;
 using AMartinezTech.Infrastucture.Utils.SqlServer.Exceptions;
 using AMartinezTech.Infrastucture.Utils.SqlServer.Persistence;
 using Microsoft.Data.SqlClient;
@@ -32,7 +33,7 @@ public class UserWriteRepository(string connectionString) : AdoRepositoryBase(co
             var messaje = SqlErrorMapper.Map(ex);
             throw new DatabaseException(messaje);
         }
-        catch (Exception ex) { throw new DatabaseException("Error inesperado en infraestructura. Creando registro.!", ex); }
+        catch (Exception ex) { throw new DatabaseException($"{ErrorMessages.Get(ErrorType.DataBaseUnknownError)}", ex); }
 
     }
 
@@ -58,6 +59,6 @@ public class UserWriteRepository(string connectionString) : AdoRepositoryBase(co
             var messaje = SqlErrorMapper.Map(ex);
             throw new DatabaseException(messaje);
         }
-        catch (Exception ex) { throw new DatabaseException("Error inesperado en infraestructura. Creando registro.!", ex); }
+        catch (Exception ex) { throw new DatabaseException($"{ErrorMessages.Get(ErrorType.DataBaseUnknownError)}", ex); }
     }
 }
