@@ -9,21 +9,21 @@ public class ServiceEntity
     public ValuePositiveNum Price { get; private set; }
     public decimal WorkingTime { get; private set; } 
     public string? Note {  get; private set; }
-    public bool IsActived { get; private set; } = true;
+    public bool IsActived { get; private set; } 
 
-    private ServiceEntity(Guid id, string name, ValuePositiveNum price, decimal workingTime, string? note)
+    private ServiceEntity(Guid id, string name, ValuePositiveNum price, decimal workingTime, string? note, bool isActived)
     {
         Id = id;
         Name = name;
         Price = price;
         WorkingTime = workingTime;
         Note = note;
+        IsActived = isActived;
     }
-    public static ServiceEntity Create(Guid id, string name, decimal price, decimal workingTime, string? note)
+    public static ServiceEntity Create(Guid id, string name, decimal price, decimal workingTime, string? note, bool isActived = true)
     {
-        return new ServiceEntity(id, name, ValuePositiveNum.Create(price,"price"), workingTime, note);
+        return new ServiceEntity(id, name, ValuePositiveNum.Create(price,"price"), workingTime, note, isActived);
     }
 
-    public void Activate() => IsActived = true;
-    public void Deactivate() => IsActived = false;
+   
 }

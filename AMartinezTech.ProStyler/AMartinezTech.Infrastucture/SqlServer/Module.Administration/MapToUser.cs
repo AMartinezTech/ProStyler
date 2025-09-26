@@ -9,11 +9,12 @@ internal class MapToUser
     {
         return UserEntity.Create(
             reader.GetGuid(reader.GetOrdinal("id")),
-             reader.GetOrdinal("name").ToString(),
-             reader.GetOrdinal("user_name").ToString(),
-             reader.GetOrdinal("rol").ToString(),
-             reader.GetOrdinal("password").ToString(),
-             bool.Parse(reader.GetOrdinal("is_actived").ToString())
+             reader.GetString(reader.GetOrdinal("name")),
+             reader.GetString(reader.GetOrdinal("user_name")),
+             reader.GetString(reader.GetOrdinal("rol")),
+             reader.GetString(reader.GetOrdinal("password")),
+             bool.Parse(reader.GetString(reader.GetOrdinal("is_actived")))
             );
     }
 }
+
