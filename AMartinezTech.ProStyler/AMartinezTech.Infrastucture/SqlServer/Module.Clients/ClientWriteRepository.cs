@@ -49,7 +49,7 @@ public class ClientWriteRepository(string connectionString) : AdoRepositoryBase(
             await conn.OpenAsync();
 
 
-            var sql = @"UPDATE clients SET  name = @name, phone = @phone, email = @email WHERE id = @id ";
+            var sql = @"UPDATE clients SET name=@name, phone=@phone, email=@email WHERE id = @id ";
 
             using var cmd = new SqlCommand(sql, conn);
             cmd.Parameters.AddWithValue("@id", entity.Id);

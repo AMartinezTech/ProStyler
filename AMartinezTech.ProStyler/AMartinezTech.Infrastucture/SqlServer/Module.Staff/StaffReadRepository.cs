@@ -1,56 +1,53 @@
-﻿using AMartinezTech.Application.Module.Clients.Interfaces;
+﻿using AMartinezTech.Application.Module.Staff.Interfaces;
 using AMartinezTech.Domain.Module.Clients;
+using AMartinezTech.Domain.Module.Staff;
 using AMartinezTech.Domain.Utils.Exceptions;
+using AMartinezTech.Infrastucture.SqlServer.Module.Clients;
 using AMartinezTech.Infrastucture.SqlServer.Utils.Exceptions;
 using AMartinezTech.Infrastucture.SqlServer.Utils.Persistence;
 using Microsoft.Data.SqlClient;
 
-namespace AMartinezTech.Infrastucture.SqlServer.Module.Clients;
+namespace AMartinezTech.Infrastucture.SqlServer.Module.Staff;
 
-public class ClientReadRepository(string connectionString) : AdoRepositoryBase(connectionString), IClientReadRepository
+public class StaffReadRepository(string connectionString) : AdoRepositoryBase(connectionString), IStaffReadRepository
 {
-    public async Task<IReadOnlyList<ClientEntity>> FilterAsync(string? filterStr, bool? isActived)
+    public async Task<IReadOnlyList<StaffEntity>> FilterAsync(string? filterStr, bool? isActived)
     {
-        var result = new List<ClientEntity>();
+        var result = new List<StaffEntity>();
         using (var conn = GetConnection())
         {
             await conn.OpenAsync();
 
             // Base query
-            var sql = @"SELECT TOP 100 * FROM clients WHERE 1=1";
-             
+            var sql = @"SELECT TOP 100 * FROM staffs WHERE 1=1";
+
             if (!string.IsNullOrWhiteSpace(filterStr))
-                sql += " AND (name LIKE @filter OR phone LIKE @filter OR email LIKE @filter)";
+                sql += " AND (name LIKE @filter OR phone LIKE @filter)";
 
             using var cmd = new SqlCommand(sql, conn);
 
-             
+
 
             if (!string.IsNullOrWhiteSpace(filterStr))
                 cmd.Parameters.AddWithValue("@filter", $"%{filterStr}%");
 
             using var reader = cmd.ExecuteReader();
             while (await reader.ReadAsync())
-                result.Add(MapToClient.ToEntity(reader));
+                result.Add(MapToStaff.ToEntity(reader));
         }
         return result;
     }
 
-    public async Task<ClientEntity> GetByIdAsync(Guid id)
+    public async Task<StaffEntity> GetByIdAsync(Guid id)
     {
         try
         {
-            ClientEntity? entity = null;
+            StaffEntity? entity = null;
             using var conn = GetConnection();
             await conn.OpenAsync();
 
-            var sql = @"SELECT 
-                            id,
-                            name,
-                            phone,
-                            email,
-                            created_at
-                        FROM clients
+            var sql = @"SELECT id, name, phone, specialties, is_actived, commision_fee_by_product, commision_fee_by_service 
+                        FROM staffs
                         WHERE id=@id";
             using var cmd = new SqlCommand(sql, conn);
 
@@ -59,7 +56,7 @@ public class ClientReadRepository(string connectionString) : AdoRepositoryBase(c
             using var reader = await cmd.ExecuteReaderAsync();
             if (await reader.ReadAsync())
             {
-                entity = MapToClient.ToEntity(reader);
+                entity = MapToStaff.ToEntity(reader);
             }
 
             if (entity == null) throw new DatabaseException($"{ErrorMessages.Get(ErrorType.RecordDoesDotExist)}"); ;
