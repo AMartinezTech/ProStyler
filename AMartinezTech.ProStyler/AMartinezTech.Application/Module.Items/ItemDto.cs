@@ -6,6 +6,7 @@ public class ItemDto
     public Guid Id { get; set; }
     public string ItemType { get; set; } = "Producto";
     public Guid CategoryId { get; set; }
+    public string CategoryName { get; set; } = string.Empty;
     public string Name { get; set; } = string.Empty;
     public decimal Price { get; set; }
     public decimal Stock { get; set; }

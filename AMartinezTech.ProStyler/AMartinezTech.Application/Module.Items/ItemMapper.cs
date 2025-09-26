@@ -11,6 +11,7 @@ internal class ItemMapper
             Id = entity.Id,
             ItemType = entity.ItemType.ToString(),
             CategoryId = entity.CategoryId.Value,
+            CategoryName = entity.CategoryName,
             Name = entity.Name,
             Price = entity.Price.Value,
             Stock = entity.Stock,

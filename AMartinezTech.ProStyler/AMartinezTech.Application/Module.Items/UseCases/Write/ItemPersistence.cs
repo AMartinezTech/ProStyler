@@ -12,7 +12,7 @@ public class ItemPersistence(IItemWriteRepository repository)
     {
         Guid _id = GeneratesId.Make(dto.Id);
 
-        var entity = ItemEntity.Create(_id, dto.ItemType, dto.CategoryId, dto.Name, dto.Price, dto.Stock, dto.GeneratesCommission);
+        var entity = ItemEntity.Create(_id, dto.ItemType, dto.CategoryId, dto.CategoryName, dto.Name, dto.Price, dto.Stock, dto.GeneratesCommission, dto.IsActived );
 
         if (dto.Id == Guid.Empty) { await _repository.CreateAsync(entity); } else { await _repository.UpdateAsync(entity); }
 
