@@ -1,4 +1,4 @@
-﻿namespace AMartinezTech.Infrastucture.Utils.SqlServer.Exceptions;
+﻿namespace AMartinezTech.Infrastucture.SqlServer.Utils.Exceptions;
 
 public class DatabaseException : Exception
 {

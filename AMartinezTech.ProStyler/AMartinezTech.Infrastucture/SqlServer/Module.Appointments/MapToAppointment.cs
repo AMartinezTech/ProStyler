@@ -1,7 +1,7 @@
 ﻿using AMartinezTech.Domain.Module.Appointments;
 using Microsoft.Data.SqlClient;
 
-namespace AMartinezTech.Infrastucture.Module.Appointments;
+namespace AMartinezTech.Infrastucture.SqlServer.Module.Appointments;
 
 internal class MapToAppointment
 {

@@ -1,11 +1,11 @@
 ﻿using AMartinezTech.Application.Module.Administration.Interfaces;
 using AMartinezTech.Domain.Module.Administration;
 using AMartinezTech.Domain.Utils.Exceptions;
-using AMartinezTech.Infrastucture.Utils.SqlServer.Exceptions;
-using AMartinezTech.Infrastucture.Utils.SqlServer.Persistence;
+using AMartinezTech.Infrastucture.SqlServer.Utils.Exceptions;
+using AMartinezTech.Infrastucture.SqlServer.Utils.Persistence;
 using Microsoft.Data.SqlClient;
 
-namespace AMartinezTech.Infrastucture.Module.Administration;
+namespace AMartinezTech.Infrastucture.SqlServer.Module.Administration;
 
 public class UserWriteRepository(string connectionString) : AdoRepositoryBase(connectionString), IUserWriteRepository
 {

@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace AMartinezTech.Infrastucture.Utils.SqlServer.DataBase;
+namespace AMartinezTech.Infrastucture.SqlServer.Utils.DataBase;
 
 public class DatabaseConfig
 {

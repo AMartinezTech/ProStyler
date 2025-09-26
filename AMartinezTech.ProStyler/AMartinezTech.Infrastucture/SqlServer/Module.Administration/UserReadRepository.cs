@@ -1,9 +1,9 @@
 ﻿using AMartinezTech.Application.Module.Administration.Interfaces;
 using AMartinezTech.Domain.Module.Administration;
-using AMartinezTech.Infrastucture.Utils.SqlServer.Persistence;
+using AMartinezTech.Infrastucture.SqlServer.Utils.Persistence;
 using Microsoft.Data.SqlClient;
 
-namespace AMartinezTech.Infrastucture.Module.Administration;
+namespace AMartinezTech.Infrastucture.SqlServer.Module.Administration;
 
 public class UserReadRepository(string connectionString) : AdoRepositoryBase(connectionString), IUserReadRepository
 {

@@ -12,7 +12,7 @@ public class AppointmentPersistence(IAppointmentWriteRepository repository)
     {
         Guid _id = GeneratesId.Make(dto.Id);
 
-        var entity = AppointmentEntity.Create(_id, dto.StaffId, dto.ClientId, dto.AsignedTime, dto.LimitTime, dto.CreatedAt, dto.Status);
+        var entity = AppointmentEntity.Create(_id, dto.StaffId,dto.StaffName, dto.ClientId, dto.ClientName, dto.AsignedTime, dto.LimitTime, dto.CreatedAt, dto.Status);
 
         if (dto.Id == Guid.Empty) { await _repository.CreateAsync(entity); } else { await _repository.UpdateAsync(entity); }
         return _id;

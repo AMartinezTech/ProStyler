@@ -1,6 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 
-namespace AMartinezTech.Infrastucture.Utils.SqlServer.Exceptions;
+namespace AMartinezTech.Infrastucture.SqlServer.Utils.Exceptions;
 
 public static class SqlErrorMapper
 {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Data.SqlClient;
 
-namespace AMartinezTech.Infrastucture.Utils.SqlServer.Persistence;
+namespace AMartinezTech.Infrastucture.SqlServer.Utils.Persistence;
 
 public abstract class AdoRepositoryBase(string connectionString)
 {

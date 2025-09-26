@@ -1,7 +1,7 @@
 ﻿using AMartinezTech.Domain.Module.Administration;
 using Microsoft.Data.SqlClient;
 
-namespace AMartinezTech.Infrastucture.Module.Administration;
+namespace AMartinezTech.Infrastucture.SqlServer.Module.Administration;
 
 internal class MapToUser
 {

@@ -2,10 +2,10 @@
 using AMartinezTech.Domain.Module.Appointments;
 using AMartinezTech.Domain.Utils;
 using AMartinezTech.Domain.Utils.Exceptions;
-using AMartinezTech.Infrastucture.Utils.SqlServer.Exceptions;
-using AMartinezTech.Infrastucture.Utils.SqlServer.Persistence;
+using AMartinezTech.Infrastucture.SqlServer.Utils.Exceptions;
+using AMartinezTech.Infrastucture.SqlServer.Utils.Persistence;
 using Microsoft.Data.SqlClient;
-namespace AMartinezTech.Infrastucture.Module.Appointments;
+namespace AMartinezTech.Infrastucture.SqlServer.Module.Appointments;
 
 public class AppointmentReadRepository(string connectionString) : AdoRepositoryBase(connectionString), IAppointmentReadRepository
 {
@@ -87,7 +87,7 @@ public class AppointmentReadRepository(string connectionString) : AdoRepositoryB
 
             if (entity == null) throw new DatabaseException($"{ErrorMessages.Get(ErrorType.RecordDoesDotExist)}"); ;
 
-            var queryServices = @"SELECT a.appointment_id, a.service_id, a.quantity, a.price, s.name AS service_name 
+            var queryServices = @"SELECT a.appointment_id, a.service_id, a.quantity, a.quantity, s.name AS service_name 
                               FROM appointment_services a
                               INNER JOIN services a ON a.service_id = s.id 
                               WHERE appointment_id = @id";
