@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMartinezTech.Application",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMartinezTech.Infrastucture", "AMartinezTech.Infrastucture\AMartinezTech.Infrastucture.csproj", "{91465E4C-F4B3-4192-AA75-1A6E90F1EE3E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMartinezTech.WinForms", "AMartinezTech.WinForms\AMartinezTech.WinForms.csproj", "{B73DCF43-B44D-4E6D-88D7-CC6EEE04EAAD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{91465E4C-F4B3-4192-AA75-1A6E90F1EE3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91465E4C-F4B3-4192-AA75-1A6E90F1EE3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91465E4C-F4B3-4192-AA75-1A6E90F1EE3E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B73DCF43-B44D-4E6D-88D7-CC6EEE04EAAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B73DCF43-B44D-4E6D-88D7-CC6EEE04EAAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B73DCF43-B44D-4E6D-88D7-CC6EEE04EAAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B73DCF43-B44D-4E6D-88D7-CC6EEE04EAAD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
