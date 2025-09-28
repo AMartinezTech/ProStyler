@@ -14,7 +14,7 @@ internal class InvoiceMapper
             StaffId = entity.StaffId.Value,
             StaffName = entity.StaffName,
             CreatedAt = entity.CreatedAt,
-            Items = entity.Items.Select(e => new InvoiceItemDto
+            Items = [.. entity.Items.Select(e => new InvoiceItemDto
             {
                 Id= e.Id,
                 InvoiceId = e.InvoiceId,
@@ -22,7 +22,7 @@ internal class InvoiceMapper
                 Description = e.Description,
                 Quantity = e.Quantity,
                 UnitPrice = e.UnitPrice,
-            }).ToList(),
+            })],
         };
     }
 

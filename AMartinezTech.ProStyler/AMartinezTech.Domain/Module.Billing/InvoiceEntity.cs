@@ -11,38 +11,40 @@ public class InvoiceEntity
     public string ClientName { get; private set; }
     public ValueGuid StaffId { get; private set; }
     public string StaffName { get; private set; }
-    public DateTime CreatedAt { get; private set; } = DateTime.UtcNow;
+    public DateTime CreatedAt { get; private set; } 
     public ValueEnum<InvoiceStatus> Status { get; private set; } = ValueEnum<InvoiceStatus>.Create("Pendiente");
-    private readonly List<InvoiceItem> _items = [];
-    public IReadOnlyCollection<InvoiceItem> Items => _items.AsReadOnly();
+    private readonly List<InvoiceDetailEntity> _items = [];
+    public IReadOnlyCollection<InvoiceDetailEntity> Items => _items.AsReadOnly();
 
     public decimal TotalAmount => _items.Sum(i => i.Total);
 
 
-    private InvoiceEntity(Guid id, ValueGuid clientId, string clientName, ValueGuid staffId, string staffName)
+    private InvoiceEntity(Guid id, ValueGuid clientId, string clientName, ValueGuid staffId, string staffName, DateTime createdAt, ValueEnum<InvoiceStatus> status)
     {
         Id = id;
         ClientId = clientId;
         ClientName = clientName;
         StaffId = staffId;
         StaffName = staffName;
+        CreatedAt = createdAt;
+        Status = status;
     }
-    public static InvoiceEntity Create(Guid id, Guid clientId, string clientName, Guid staffId, string staffName)
+    public static InvoiceEntity Create(Guid id, Guid clientId, string clientName, Guid staffId, string staffName, DateTime createdAt, string status)
     {
-        return new InvoiceEntity(id, ValueGuid.Create(clientId, "customer"), clientName, ValueGuid.Create(staffId, "staff"), staffName);
+        return new InvoiceEntity(id, ValueGuid.Create(clientId, "customer"), clientName, ValueGuid.Create(staffId, "staff"), staffName, createdAt, ValueEnum<InvoiceStatus>.Create(status));
     }
     // ✅ Método de dominio para agregar un ítem
-    public void AddItem(string type, string description, decimal quantity, decimal unitPrice)
+    public void AddDetail(InvoiceDetailEntity detail)
     {
-        if (quantity <= 0) throw new Exception($"{ErrorMessages.Get(ErrorType.NoNegativeNum)} - quantity");
-        if (unitPrice < 0) throw new Exception($"{ErrorMessages.Get(ErrorType.NoNegativeNum)} - unitprice ");
+        if (detail.Quantity <= 0) throw new Exception($"{ErrorMessages.Get(ErrorType.NoNegativeNum)} - quantity");
+        if (detail.UnitPrice < 0) throw new Exception($"{ErrorMessages.Get(ErrorType.NoNegativeNum)} - unitprice ");
 
 
-        var item = new InvoiceItem(this.Id, ValueEnum<ItemType>.Create(type), description, quantity, unitPrice);
-        _items.Add(item);
+        
+        _items.Add(detail);
     }
     // ✅ Método de acceso controlado
-    public IReadOnlyCollection<InvoiceItem> GetItems()
+    public IReadOnlyCollection<InvoiceDetailEntity> GetItems()
         => _items.AsReadOnly();
 
 
@@ -59,26 +61,6 @@ public class InvoiceEntity
 
     // ✅ Método para cancelar factura
     public void Cancel() => Status = ValueEnum<InvoiceStatus>.Create("Cancelada");
-
-    // 🔒 Clase interna, inaccesible desde fuera
-    public class InvoiceItem
-    {
-        public Guid Id { get; private set; } = Guid.NewGuid();
-        public Guid InvoiceId { get; private set; }
-        public ValueEnum<ItemType> Type { get; private set; }
-        public string Description { get; private set; }
-        public decimal Quantity { get; private set; }
-        public decimal UnitPrice { get; private set; }
-        public decimal Total => Quantity * UnitPrice;
-
-        internal InvoiceItem(Guid invoiceId, ValueEnum<ItemType> type, string description, decimal quantity, decimal unitPrice)
-        {
-            InvoiceId = invoiceId;
-            Type = type;
-            Description = description;
-            Quantity = quantity;
-            UnitPrice = unitPrice;
-        }
-    }
+ 
 }
 

@@ -2,5 +2,5 @@
 
 public enum InvoiceStatus
 {
-    Pendiente, Paga, Cancelada, Expirada
+    Anulada, Pendiente, Paga, Expirada
 }

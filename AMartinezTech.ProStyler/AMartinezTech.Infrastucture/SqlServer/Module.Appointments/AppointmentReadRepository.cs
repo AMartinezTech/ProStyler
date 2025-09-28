@@ -13,7 +13,6 @@ public class AppointmentReadRepository(string connectionString) : AdoRepositoryB
     {
         var result = new List<AppointmentEntity>();
          
-
         using (var conn = GetConnection())
         {
             await conn.OpenAsync();

@@ -16,7 +16,7 @@ public class InvoicePersistence (IInvoiceWriteRepository repository)
 
         foreach (var item in dto.Items) 
         {
-            entity.AddItem(item.Type, item.Description, item.Quantity, item.UnitPrice);
+            entity.AddDetail(item.Type, item.Description, item.Quantity, item.UnitPrice);
         }
 
         if (dto.Id == Guid.Empty) { await _repository.CreateAsync(entity); } else { await _repository.UpdateAsync(entity); }
