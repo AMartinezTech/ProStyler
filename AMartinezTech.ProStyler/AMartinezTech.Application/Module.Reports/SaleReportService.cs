@@ -4,7 +4,7 @@ using AMartinezTech.Domain.Module.Reports;
 
 namespace AMartinezTech.Application.Module.Reports;
 
-public class ReportSalesService(IReportSalesService reportService, DateTime dateInitial, DateTime dateEnd)
+public class SaleReportService(IReportSalesService reportService, DateTime dateInitial, DateTime dateEnd)
 {
 
     private readonly IReportSalesService ReportService = reportService;
