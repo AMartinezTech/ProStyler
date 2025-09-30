@@ -1,0 +1,6 @@
+{
+  "ConnectionStrings": {
+    "Server": "AMARTINEZTECH\\SQLEXPRESS",
+    "Database": "prostyledb"
+  }
+}

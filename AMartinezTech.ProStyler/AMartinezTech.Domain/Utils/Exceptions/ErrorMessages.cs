@@ -20,6 +20,8 @@ public class ErrorMessages
             ErrorType.RecordUpdateError => "Error actualizando el registro.!",
             ErrorType.RecordDeleteError => "Error borrando el registro.!",
             ErrorType.DataBaseUnknownError => "Error desconocido de base de datos.!",
+            ErrorType.PasswordNotMatch => "Las claves NO coinciden.!",
+            ErrorType.InvalidCredentials => "La credenciales no son válidas.!",
             _ => "Error no definido",
         };
     }  

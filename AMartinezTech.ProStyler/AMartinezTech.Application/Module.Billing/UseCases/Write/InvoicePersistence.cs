@@ -12,11 +12,12 @@ public class InvoicePersistence (IInvoiceWriteRepository repository)
     {
         Guid _id = GeneratesId.Make(dto.Id);
 
-        var entity = InvoiceEntity.Create(_id, dto.ClientId, dto.ClientName, dto.StaffId, dto.StaffName);
+        var entity = InvoiceEntity.Create(_id, dto.ClientId, dto.ClientName, dto.StaffId, dto.StaffName, dto.CreatedAt, dto.Status);
 
         foreach (var item in dto.Items) 
         {
-            entity.AddDetail(item.Type, item.Description, item.Quantity, item.UnitPrice);
+            var detail = InvoiceDetailEntity.Create(entity.Id,item.Type, item.Description, item.Quantity, item.UnitPrice);
+            entity.AddDetail(detail);
         }
 
         if (dto.Id == Guid.Empty) { await _repository.CreateAsync(entity); } else { await _repository.UpdateAsync(entity); }

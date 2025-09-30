@@ -15,5 +15,7 @@ public enum ErrorType
     RecordCreateError,
     RecordUpdateError,
     RecordDeleteError,
-    DataBaseUnknownError
+    DataBaseUnknownError,
+    PasswordNotMatch,
+    InvalidCredentials
 }

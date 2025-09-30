@@ -9,6 +9,7 @@ public class UserEntity
     public ValueName Name { get; private set; }
     public ValueUserName UserName { get; private set; }
     public ValuePassword PasswordHash { get; private set; }
+    public string? ConfirmPasswordHash { get; private set; }
     public ValueEnum<RolType> Rol { get; private set; }
     public bool IsActived { get; private set; } = true;
     private UserEntity(Guid id, ValueName name, ValueUserName userName, ValuePassword passwordHash, ValueEnum<RolType> rol, bool isActived)
@@ -21,9 +22,9 @@ public class UserEntity
         IsActived = isActived;
     }
 
-    public static UserEntity Create(Guid id, string name, string userName, string passwordHash, string rol, bool isActived)
+    public static UserEntity Create(Guid id, string name, string userName, ValuePassword passwordHash, string rol, bool isActived)
     {
-        return new UserEntity(id, ValueName.Create(name), ValueUserName.Create(userName), ValuePassword.Create(passwordHash), ValueEnum<RolType>.Create(rol), isActived);
+        return new UserEntity(id, ValueName.Create(name), ValueUserName.Create(userName), passwordHash, ValueEnum<RolType>.Create(rol), isActived);
     }
-
+    
 }

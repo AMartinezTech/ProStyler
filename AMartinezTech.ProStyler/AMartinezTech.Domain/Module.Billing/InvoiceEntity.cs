@@ -39,8 +39,6 @@ public class InvoiceEntity
         if (detail.Quantity <= 0) throw new Exception($"{ErrorMessages.Get(ErrorType.NoNegativeNum)} - quantity");
         if (detail.UnitPrice < 0) throw new Exception($"{ErrorMessages.Get(ErrorType.NoNegativeNum)} - unitprice ");
 
-
-        
         _items.Add(detail);
     }
     // ✅ Método de acceso controlado

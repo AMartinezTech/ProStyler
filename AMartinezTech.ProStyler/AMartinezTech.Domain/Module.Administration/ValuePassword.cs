@@ -1,34 +1,66 @@
-﻿using AMartinezTech.Domain.Utils.Exceptions;
-using System.Text.RegularExpressions;
+﻿ 
+using System.Security.Cryptography; 
 
 namespace AMartinezTech.Domain.Module.Administration;
-
+ 
 public class ValuePassword
 {
-    public string Value { get; }
+    public string Hash { get; private set; }
 
-    private ValuePassword(string value)
+    private ValuePassword(string hash)
     {
-        Value = value;
+        Hash = hash;
     }
 
-    public static ValuePassword Create(string value, int minLength = 6, int maxLength = 12)
+    // Crear desde texto plano
+    public static ValuePassword Create(string plainPassword, string confirmPassword)
     {
-        if (string.IsNullOrWhiteSpace(value))
-            throw new Exception($"{ErrorMessages.Get(ErrorType.RequiredField)} - clave");
+        if (plainPassword != confirmPassword)
+            throw new ArgumentException("Las contraseñas no coinciden.");
 
-        if (value.Length < minLength || value.Length > maxLength)
-            throw new Exception($"La clave debe tener entre {minLength} y {maxLength} caracteres.");
-
-        // Validación: al menos una letra y un número
-        var regex = new Regex(@"^(?=.*[A-Za-z])(?=.*\d).+$");
-        if (!regex.IsMatch(value))
-            throw new Exception("La clave debe contener al menos una letra y un número.");
-
-        return new ValuePassword(value);
+        var hash = HashPassword(plainPassword);
+        return new ValuePassword(hash);
     }
 
-    public override int GetHashCode() => Value.GetHashCode();
+    // Crear desde hash ya existente (ej: al leer de BD)
+    public static ValuePassword FromHash(string hash) => new(hash);
 
-    public override string ToString() => Value;
+    // Verificar contraseña
+    public bool Verify(string plainPassword) =>
+        VerifyPassword(plainPassword, Hash);
+
+    // --- Métodos privados de hash ---
+    private static string HashPassword(string password)
+    {
+        using var rng = new RNGCryptoServiceProvider();
+        byte[] salt = new byte[16];
+        rng.GetBytes(salt);
+
+        var pbkdf2 = new Rfc2898DeriveBytes(password, salt, 100000, HashAlgorithmName.SHA256);
+        byte[] hash = pbkdf2.GetBytes(32);
+
+        byte[] hashBytes = new byte[48];
+        Array.Copy(salt, 0, hashBytes, 0, 16);
+        Array.Copy(hash, 0, hashBytes, 16, 32);
+
+        return Convert.ToBase64String(hashBytes);
+    }
+
+    private static bool VerifyPassword(string password, string storedHash)
+    {
+        byte[] hashBytes = Convert.FromBase64String(storedHash);
+        byte[] salt = new byte[16];
+        Array.Copy(hashBytes, 0, salt, 0, 16);
+
+        var pbkdf2 = new Rfc2898DeriveBytes(password, salt, 100000, HashAlgorithmName.SHA256);
+        byte[] hash = pbkdf2.GetBytes(32);
+
+        for (int i = 0; i < 32; i++)
+        {
+            if (hashBytes[i + 16] != hash[i])
+                return false;
+        }
+
+        return true;
+    }
 }

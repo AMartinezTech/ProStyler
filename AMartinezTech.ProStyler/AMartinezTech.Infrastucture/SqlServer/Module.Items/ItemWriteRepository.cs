@@ -33,7 +33,7 @@ public class ItemWriteRepository(string connectionString) : AdoRepositoryBase(co
                         @price,
                         @stock,
                         @generates_commission,
-                        @is_actived))";
+                        @is_actived)";
 
             using var cmd = new SqlCommand(sql, conn);
             cmd.Parameters.AddWithValue("@id", entity.Id);

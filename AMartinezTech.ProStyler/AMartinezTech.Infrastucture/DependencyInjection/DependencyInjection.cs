@@ -4,9 +4,9 @@ namespace AMartinezTech.Infrastucture.DependencyInjection;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddInfrastructure(this IServiceCollection services, string connectionString)
+    public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, string connectionString)
     {
-
+        services.AddAdministrationModule(connectionString);
         return services;
     }
 }
